@@ -1,7 +1,7 @@
 # liquibase-sample
 tutorial para criar um controle de versão de banco de dados com o liquibase para Node
 
-Sim, o Liquibase pode ser utilizado com outras linguagens, incluindo Node.js. A integração geralmente envolve configurar o Liquibase para ser executado como um processo separado ou via scripts que podem ser chamados a partir do código Node.js. Abaixo está um tutorial básico para configurar e usar o Liquibase com Node.js:
+Liquibase pode ser utilizado com diversas linguagens, incluindo Node.js. A integração geralmente envolve configurar o Liquibase para ser executado como um processo separado ou via scripts que podem ser chamados a partir do código Node.js. Abaixo está um tutorial básico para configurar e usar o Liquibase com Node.js:
 
 ### Passo a Passo para Implementar Migrações com Liquibase em um Projeto Node.js
 
