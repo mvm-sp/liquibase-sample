@@ -100,5 +100,5 @@ Liquibase pode ser utilizado com diversas linguagens, incluindo Node.js. A integ
 ### Tutorial Completo
 
 Para um tutorial mais detalhado, recomendo o seguinte link:
-- [Using Liquibase with Node.js](https://www.baeldung.com/liquibase-nodejs) (Note que este link é fictício para fins de exemplo; você pode procurar tutoriais similares online).
+- [Using Liquibase with MySQL](https://docs.liquibase.com/start/tutorials/mysql.html) 
 
