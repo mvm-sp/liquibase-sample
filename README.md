@@ -123,10 +123,7 @@ runUpdate();
     inst.status();
 
    ```
-  **Executar o typescript**:
-```bash
-npx ts-node --project ./tsconfig.json ./index.ts
-```
+
 **Criar o ChangeLog Master**:
    - No diretório raíz crie um arquivo chamado `db.changelog-master.xml` com o seguinte conteúdo:
 
@@ -162,7 +159,10 @@ npx ts-node --project ./tsconfig.json ./index.ts
          </changeSet>
      </databaseChangeLog>
      ```
-
+  **Executar o typescript**:
+```bash
+npx ts-node --project ./tsconfig.json ./index.ts
+```
   **Executar o Liquibase a partir do Node.js**:
    - Crie um script Node.js para executar os comandos do Liquibase. Aqui está um exemplo simples usando o módulo `child_process` do Node.js como o exemplo [testing.js](./testing.js) :
 
