@@ -164,14 +164,14 @@ runUpdate();
 npx ts-node --project ./tsconfig.json ./index.ts
 ```
   **Executar o Liquibase a partir do Node.js**:
-   - Crie um script Node.js para executar os comandos do Liquibase. Aqui está um exemplo simples usando o módulo `child_process` do Node.js como o exemplo [testing.js](./testing.js) :
+   - Crie um script Node.js para executar os comandos do Liquibase. Aqui está um exemplo simples usando o módulo `child_process` do Node.js como o arquivo [testing.js](./testing.js) :
 
      
 **Executar o Script**:
    - No terminal, execute o script Node.js criado:
 
      ```sh
-     node seu_script.js
+     node testing.js
      ```
 
 ### Tutorial Completo
