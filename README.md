@@ -28,7 +28,7 @@ sh db-start.sh
      npm install liquibase
      npm install --save node-liquibase
      ```
-  **Criar o arquivo index.ts**
+  **Criar o arquivo testing.js**
 
   ```javascript
 const { execSync } = require('child_process');
@@ -37,18 +37,18 @@ const path = require('path');
 const POSTGRESQL_DEFAULT_CONFIG = require('node-liquibase').POSTGRESQL_DEFAULT_CONFIG;
 
 const runCommand = (command) => {
-  console.log(`Running command: ${command}`);
-  try {
-    const stdout = execSync(command);
-    console.log(`Command completed successfully. Stdout: ${stdout.toString()}`);
-    return stdout.toString();
-  } catch (error) {
-    console.error(`Error executing command: ${command}`);
-    console.error(`Error: ${error.message}`);
-    console.error(`Stdout: ${error.stdout ? error.stdout.toString() : 'N/A'}`);
-    console.error(`Stderr: ${error.stderr ? error.stderr.toString() : 'N/A'}`);
-    throw error;
-  }
+    console.log(`Running command: ${command}`);
+    try {
+      const stdout = execSync(command);
+      console.log(`Command completed successfully. Stdout: ${stdout.toString()}`);
+      return stdout.toString();
+    } catch (error) {
+      console.error(`Error executing command: ${command}`);
+      console.error(`Error: ${error.message}`);
+      console.error(`Stdout: ${error.stdout ? error.stdout.toString() : 'N/A'}`);
+      console.error(`Stderr: ${error.stderr ? error.stderr.toString() : 'N/A'}`);
+      throw error;
+    }
 };
 
 // Ensure the path to changelog.xml is absolute
@@ -61,40 +61,40 @@ const myConfig = {
 };
 
 const checkLiquibaseVersion = () => {
-  const versionCommand = `liquibase --version`;
+    const versionCommand = `liquibase --version`;
 
-  try {
-    const versionOutput = runCommand(versionCommand);
-    console.log(`Liquibase version: ${versionOutput}`);
-  } catch (error) {
-    console.error(`Error checking Liquibase version: ${error.message}`);
-  }
+    try {
+      const versionOutput = runCommand(versionCommand);
+      console.log(`Liquibase version: ${versionOutput}`);
+    } catch (error) {
+      console.error(`Error checking Liquibase version: ${error.message}`);
+    }
 };
 
 const runStatus = () => {
-  const statusCommand = `liquibase --logLevel=debug --url=${myConfig.url} --username=${myConfig.username} --password=${myConfig.password} --changeLogFile=${myConfig.changeLogFile} status`;
+    const statusCommand = `liquibase --logLevel=debug --url=${myConfig.url} --username=${myConfig.username} --password=${myConfig.password} --changeLogFile=${myConfig.changeLogFile} status`;
 
-  console.log(`Running status command: ${statusCommand}`);
+    console.log(`Running status command: ${statusCommand}`);
 
-  try {
-    const statusOutput = runCommand(statusCommand);
-    console.log(`Liquibase status: ${statusOutput}`);
-  } catch (error) {
-    console.error(`Status command error: ${error.message}`);
-  }
+    try {
+      const statusOutput = runCommand(statusCommand);
+      console.log(`Liquibase status: ${statusOutput}`);
+    } catch (error) {
+      console.error(`Status command error: ${error.message}`);
+    }
 };
 
 const runUpdate = () => {
-  const updateCommand = `liquibase --logLevel=debug --url=${myConfig.url} --username=${myConfig.username} --password=${myConfig.password} --changeLogFile=${myConfig.changeLogFile} update`;
+    const updateCommand = `liquibase --logLevel=debug --url=${myConfig.url} --username=${myConfig.username} --password=${myConfig.password} --changeLogFile=${myConfig.changeLogFile} update`;
 
-  console.log(`Running update command: ${updateCommand}`);
+    console.log(`Running update command: ${updateCommand}`);
 
-  try {
-    const updateOutput = runCommand(updateCommand);
-    console.log(`Liquibase update completed successfully: ${updateOutput}`);
-  } catch (error) {
-    console.error(`Update command error: ${error.message}`);
-  }
+    try {
+      const updateOutput = runCommand(updateCommand);
+      console.log(`Liquibase update completed successfully: ${updateOutput}`);
+    } catch (error) {
+      console.error(`Update command error: ${error.message}`);
+    }
 };
 
 // First, check Liquibase version
