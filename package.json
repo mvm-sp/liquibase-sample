@@ -1,0 +1,21 @@
+{
+  "name": "node-liquibase-sandbox",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "MVM",
+  "license": "MIT",
+  "dependencies": {
+    "liquibase": "^4.27.0",
+    "node-liquibase": "^4.1.1"
+  },
+  "scripts": {
+    "node-liquibase": "node-liquibase",
+    "test:ts": "npx ts-node --project ./tsconfig.json ./index.ts",
+    "test:js": "node ./testing.js"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.40",
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.4"
+  }
+}

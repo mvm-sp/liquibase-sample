@@ -5,37 +5,55 @@ Liquibase pode ser utilizado com diversas linguagens, incluindo Node.js. A integ
 
 ### Passo a Passo para Implementar Migrações com Liquibase em um Projeto Node.js
 
-1. **Instalar o Liquibase**:
+  **Instalar o Liquibase**:
    - Baixe o Liquibase do site oficial [Liquibase Downloads](https://www.liquibase.org/download).
    - Extraia o arquivo baixado para um diretório de sua escolha.
    - Adicione o diretório bin do Liquibase ao seu PATH do sistema para facilitar a execução dos comandos.
 
-2. **Configurar o Banco de Dados**:
+  **Configurar o Banco de Dados**:
    - Certifique-se de ter um banco de dados configurado (por exemplo, MySQL, PostgreSQL).
    - Crie um banco de dados para o seu projeto.
+   - Este repositório possui um `shellscript` para facilitar a criação de um Banco De dados `PostgreSQL` no `Docker`  [db-start.shL](./db-start.sh) 
 
-3. **Configurar um Projeto Node.js**:
+```shell
+sh db-start.sh
+```
+  **Configurar um Projeto Node.js**:
    - Crie um novo projeto Node.js ou use um existente.
    - Instale as dependências necessárias (neste exemplo, vamos usar `pg` para PostgreSQL):
 
      ```sh
      npm init -y
      npm install pg
+     npm install liquibase
+     npm install --save node-liquibase
      ```
 
-4. **Criar Arquivo de Configuração (`liquibase.properties`)**:
-   - Crie um arquivo chamado `liquibase.properties` no diretório raiz do seu projeto com as seguintes configurações:
+  **Criar o ChangeLog Master**:
+   Criar oa arquivo index.ts
 
-     ```properties
-     changeLogFile=src/main/resources/db/changelog/db.changelog-master.xml
-     url=jdbc:postgresql://localhost:5432/seu_banco_de_dados
-     username=seu_usuario
-     password=sua_senha
-     driver=org.postgresql.Driver
-     ```
+   ```javascript
+   import { Liquibase, LiquibaseConfig, LiquibaseLogLevels, POSTGRESQL_DEFAULT_CONFIG } from 'liquibase';
+   
+   const myConfig: LiquibaseConfig = {
+    ...POSTGRESQL_DEFAULT_CONFIG,
+      changeLogFile: './resources/db/changelog/db.changelog-1.0.xml',
+        url: 'jdbc:postgresql://localhost:5432/postgres',
+        username: 'youruser',
+        password: 'yourpassword',
+        liquibaseSchemaName: 'public',
+        logLevel: LiquibaseLogLevels.Off, 
+    }
+    const inst = new Liquibase(myConfig);
+    inst.status();
 
-5. **Criar o ChangeLog Master**:
-   - No diretório especificado (`src/main/resources/db/changelog/`), crie um arquivo chamado `db.changelog-master.xml` com o seguinte conteúdo:
+   ```
+  **Executar o typescript**:
+```bash
+npx ts-node --project ./tsconfig.json ./index.ts
+```
+**Criar o ChangeLog Master**:
+   - No diretório raíz crie um arquivo chamado `db.changelog-master.xml` com o seguinte conteúdo:
 
      ```xml
      <databaseChangeLog
@@ -47,8 +65,7 @@ Liquibase pode ser utilizado com diversas linguagens, incluindo Node.js. A integ
          <include file="db.changelog-1.0.xml"/>
      </databaseChangeLog>
      ```
-
-6. **Criar o Arquivo de Migração (`db.changelog-1.0.xml`)**:
+  **Criar o Arquivo de Migração (`db.changelog-1.0.xml`)**:
    - No mesmo diretório, crie um arquivo chamado `db.changelog-1.0.xml` com uma mudança simples, como a criação de uma tabela:
 
      ```xml
@@ -71,26 +88,11 @@ Liquibase pode ser utilizado com diversas linguagens, incluindo Node.js. A integ
      </databaseChangeLog>
      ```
 
-7. **Executar o Liquibase a partir do Node.js**:
-   - Crie um script Node.js para executar os comandos do Liquibase. Aqui está um exemplo simples usando o módulo `child_process` do Node.js:
+  **Executar o Liquibase a partir do Node.js**:
+   - Crie um script Node.js para executar os comandos do Liquibase. Aqui está um exemplo simples usando o módulo `child_process` do Node.js como o exemplo [testing.js](./testing.js) :
 
-     ```javascript
-     const { exec } = require('child_process');
-
-     exec('liquibase update', (error, stdout, stderr) => {
-       if (error) {
-         console.error(`Erro ao executar o Liquibase: ${error.message}`);
-         return;
-       }
-       if (stderr) {
-         console.error(`Erro: ${stderr}`);
-         return;
-       }
-       console.log(`Resultado: ${stdout}`);
-     });
-     ```
-
-8. **Executar o Script**:
+     
+**Executar o Script**:
    - No terminal, execute o script Node.js criado:
 
      ```sh
