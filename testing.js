@@ -23,8 +23,8 @@ const myConfig = {
   ...POSTGRESQL_DEFAULT_CONFIG,
   changeLogFile: 'db.changelog-master.xml',
   url: 'jdbc:postgresql://localhost:5432/postgres',
-  username: 'postgres',
-  password: 'posgrespw',  
+  username: 'youruser',
+  password: 'yourpassword',  
 };
 
 const checkLiquibaseVersion = () => {
